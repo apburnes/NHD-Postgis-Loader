@@ -1,0 +1,25 @@
+{
+  "name": "nhd-load",
+  "version": "0.0.1",
+  "description": "Load NHD fileGDB into postgis db",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "keywords": [
+    "NHD",
+    "postgis",
+    "load"
+  ],
+  "author": "apburnes <bizzurnzz@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "jsftp": "^1.4.1",
+    "lodash": "^3.1.0",
+    "unzip": "^0.1.11"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0"
+  }
+}
