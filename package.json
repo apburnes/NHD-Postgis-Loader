@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "Load NHD fileGDB into postgis db",
   "main": "index.js",
+  "bin": {
+    "nhd-load": "./bin/cli.js"
+  },
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "download": "node ./exec.js"
   },
   "keywords": [
     "NHD",
@@ -14,8 +18,16 @@
   "author": "apburnes <bizzurnzz@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "glob": "^5.0.1",
     "jsftp": "^1.4.1",
-    "lodash": "^3.1.0",
+    "lodash": "^3.5.0",
+    "minimist": "^1.1.1",
+    "nomnom": "^1.8.1",
+    "ogr2ogr": "^0.5.1",
+    "pg-query": "^0.11.0",
+    "pg.js": "^4.1.1",
+    "prompt": "^0.2.14",
+    "require-dir": "^0.1.0",
     "unzip": "^0.1.11"
   },
   "devDependencies": {

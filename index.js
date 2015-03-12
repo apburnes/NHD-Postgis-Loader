@@ -1,3 +1,3 @@
 'use strict';
 
-var download = require('./lib/download');
+module.exports = require('require-dir')('./lib');
