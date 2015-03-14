@@ -25,6 +25,10 @@ describe('Query Constructor', function() {
     };
   });
 
+  afterEach(function() {
+    dbOpts = null;
+  });
+
   it('should successfully create the connection string', function() {
     var pg = new Query(dbOpts);
     return expect(pg.connectionParameters).to.equal(connString);
