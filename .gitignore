@@ -2,3 +2,5 @@ node_modules
 npm-debug
 *.gdb
 *.zip
+data
+.DS_Store
