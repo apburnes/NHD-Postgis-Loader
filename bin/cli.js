@@ -15,7 +15,8 @@ var argv = parseArgs(process.argv.slice(2), {
     u: 'user',
     pw: 'password',
     p: 'port',
-    h: 'host'
+    h: 'host',
+    t: 'timeout'
   }
 });
 
@@ -36,6 +37,7 @@ if (!func || argv._[0] === 'help' || argv.help) {
   console.log('  --user=[string]');
   console.log('  --password=[string]');
   console.log('  --port=[number] Default: 5432');
+  console.log('  --timeout=[number] Default: 300000 ms');
   process.exit(1);
 }
 

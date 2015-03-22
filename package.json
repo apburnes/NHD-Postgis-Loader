@@ -7,7 +7,7 @@
     "nhd-load": "./bin/cli.js"
   },
   "scripts": {
-    "test": "mocha test --timeout 5000",
+    "test": "mocha test --timeout 300000",
     "download": "node ./exec.js"
   },
   "keywords": [
