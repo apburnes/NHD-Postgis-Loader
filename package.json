@@ -6,9 +6,17 @@
   "bin": {
     "nhd-load": "./bin/cli.js"
   },
+  "engines": {
+    "node": ">=0.10.x",
+    "npm": ">=2.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apburnes/NHD-Postgis-Loader"
+  },
+  "homepage": "https://github.com/apburnes/NHD-Postgis-Loader",
   "scripts": {
-    "test": "mocha test --timeout 300000",
-    "download": "node ./exec.js"
+    "test": "mocha test --timeout 300000"
   },
   "keywords": [
     "NHD",
@@ -19,7 +27,7 @@
     "load"
   ],
   "author": "apburnes <bizzurnzz@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "glob": "^5.0.1",
     "lodash": "^3.5.0",
