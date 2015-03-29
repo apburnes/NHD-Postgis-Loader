@@ -1,6 +1,6 @@
 {
   "name": "nhd-load",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Load NHD fileGDB into postgis db",
   "main": "index.js",
   "bin": {

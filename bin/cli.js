@@ -5,11 +5,10 @@ var path = require('path');
 var glob = require('glob');
 var parseArgs = require('minimist');
 
-var ogr2ogr = require('ogr2ogr');
+var nhd = require('../');
 
 var argv = parseArgs(process.argv.slice(2), {
   alias: {
-    h: 'help',
     f: 'format',
     db: 'dbname',
     u: 'user',
@@ -20,29 +19,51 @@ var argv = parseArgs(process.argv.slice(2), {
   }
 });
 
-var func = argv._[0];
+var func = nhd[argv._[0]];
+var filegdb = path.resolve(argv._[1] || '');
 
 if (!func || argv._[0] === 'help' || argv.help) {
   console.log('Usage:');
-  console.log(' nhd-load gdb <src> [options]');
-  console.log('');
-  console.log(' nhd-load dir <src> [options]');
+  console.log(' nhd-load loadFilegdb [options] <src>');
   console.log('');
   console.log('Example:');
-  console.log('  nhd-load loadFilegbd nhd.gdb -db=nhd-db -u=postgres -pw=password -p=5432');
+  console.log('  $ nhd-load loadFilegdb --dbname=nhdtest --port=5432 --host=localhost --user=postgres --password=password filegdbs/NHDData.gdb');
   console.log('');
   console.log('Options:');
-  console.log('  --format=[destination database]  Default: PostgreSQL');
   console.log('  --dbname=[string]');
   console.log('  --user=[string]');
   console.log('  --password=[string]');
+  console.log('  --host=[string] Default: "localhost"');
   console.log('  --port=[number] Default: 5432');
   console.log('  --timeout=[number] Default: 300000 ms');
-  process.exit(1);
+  process.exit(0);
 }
 
 if (func) {
-  console.log(func);
+  func(filegdb, argv, function(err, result) {
+    if (err) {
+      processExit(err);
+    }
+
+    processExit();
+  });
 }
 
+function processExit(msg) {
+  process.on('exit', function(code) {
+    if (code === 0) {
+      console.log('Success');
+    }
 
+    if (code === 1) {
+      console.log('Error: ' + msg)
+    }
+  });
+
+  if (msg) {
+    process.exit(1);
+  }
+  else {
+    process.exit(0);
+  }
+}
