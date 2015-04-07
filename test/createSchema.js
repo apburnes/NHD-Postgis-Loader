@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var path = require('path');
 var chai = require('chai');
 var expect = chai.expect;
@@ -10,9 +11,9 @@ var query = require('pg-query');
 var connString = 'postgres://postgres:password@localhost:5432/test'
 query.connectionParameters = connString;
 
-var flowlinesCheck = 'SELECT * FROM flowlines;'
+var flowlinesCheck = 'SELECT COUNT(*) FROM flowlines;'
 var extCheck = 'SELECT extname FROM pg_extension;'
-var cleanUp = 'DROP TABLE IF EXISTS flowlines; DROP EXTENSION IF EXISTS "postgis"; DROP EXTENSION IF EXISTS "uuid-ossp";'
+var dropSchema = fs.readFileSync(path.join(__dirname, './fixtures/dropSchema.sql'), 'utf-8');
 
 var dbOpts = {
   dbname: 'test',
@@ -25,17 +26,15 @@ var dbOpts = {
 describe('createSchema', function() {
 
   afterEach(function(done) {
-    query(cleanUp, function(err) {
+    query(dropSchema, function(err) {
       done(err);
     });
   });
 
   it('should successfully create the flowlines table', function(done) {
     createSchema(dbOpts, function(err, result) {
-      query(flowlinesCheck, function(err, rows) {
-        expect(rows).to.have.length(0);
-        done(err);
-      });
+      expect(result.command).to.equal('CREATE');
+      done(err);
     });
   });
 

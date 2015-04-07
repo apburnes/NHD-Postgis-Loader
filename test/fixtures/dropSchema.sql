@@ -24,6 +24,9 @@ DROP SEQUENCE IF EXISTS "wbdhu10_ogc_fid_seq" CASCADE;
 DROP SEQUENCE IF EXISTS "wbdhu6_ogc_fid_seq" CASCADE;
 
 DROP TABLE IF EXISTS "flowlines" CASCADE;
+DROP TABLE IF EXISTS "hydro_unit_boundaries" CASCADE;
+DROP FUNCTION IF EXISTS hu_classify(huc varchar) CASCADE;
+
 DROP TABLE IF EXISTS "hydro_net_junctions" CASCADE;
 DROP TABLE IF EXISTS "nhdarea" CASCADE;
 DROP TABLE IF EXISTS "nhdareaeventfc" CASCADE;
