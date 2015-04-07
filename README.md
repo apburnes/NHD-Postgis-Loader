@@ -52,6 +52,30 @@ nhd.loadFilegdb(nhdFilegdb, dbOptions, function(err, result) {
 
 ```
 
+#### nhd.dropSchema
+
+```js
+var nhd = require('nhd-load');
+
+var dbOptions = {
+  dbname: 'test',
+  user: 'postgres',
+  password: 'password',
+  host: 'localhost',
+  port: '5432'
+};
+
+nhd.dropSchema(nhdFilegdb, dbOptions, function(err, result) {
+  if (err) {
+    // handle err
+  }
+
+  console.log(result);
+});
+
+```
+
+
 ## CLI
 
 #### loadFilegdb
@@ -62,10 +86,15 @@ $ nhd-load loadFilegdb --dbname=nhdtest --port=5432 --host=localhost --user=post
 nhd-load help
 
 Usage:
- nhd-load gdb <src> [options]
+ nhd-load loadFilegdb <src> <options>
+ nhd-load dropSchema <options>
 
 Example:
+// Load NHD data
   $ nhd-load loadFilegdb --dbname=nhdtest --port=5432 --host=localhost --user=postgres --password=password filegdbs/NHDData.gdb
+
+// Drop the transformed data and tables from the pg database
+  $ nhd-load dropSchema --dbname=nhdtest --port=5432 --host=localhost --user=postgres --password=password filegdbs/NHDData.gdb
 
 Options:
   --format=[destination database]  Default: PostgreSQL

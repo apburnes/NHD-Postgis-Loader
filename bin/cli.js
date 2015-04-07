@@ -19,15 +19,20 @@ var argv = parseArgs(process.argv.slice(2), {
   }
 });
 
-var func = nhd[argv._[0]];
+var funcArg = argv._[0];
 var filegdb = path.resolve(argv._[1] || '');
 
-if (!func || argv._[0] === 'help' || argv.help) {
+if (!funcArg || argv._[0] === 'help' || argv.help) {
   console.log('Usage:');
   console.log(' nhd-load loadFilegdb [options] <src>');
+  console.log(' nhd-load dropSchema [options]');
   console.log('');
   console.log('Example:');
+  console.log('  // Load NHD data into PG database');
   console.log('  $ nhd-load loadFilegdb --dbname=nhdtest --port=5432 --host=localhost --user=postgres --password=password filegdbs/NHDData.gdb');
+  console.log('');
+  console.log('  // Drop the transformed data and schema from the PG database');
+  console.log('  $ nhd-load loadFilegdb --dbname=nhdtest --port=5432 --host=localhost --user=postgres --password=password');
   console.log('');
   console.log('Options:');
   console.log('  --dbname=[string]');
@@ -39,8 +44,18 @@ if (!func || argv._[0] === 'help' || argv.help) {
   process.exit(0);
 }
 
-if (func) {
-  func(filegdb, argv, function(err, result) {
+if (funcArg === 'loadFilegdb') {
+  nhd[funcArg](filegdb, argv, function(err, result) {
+    if (err) {
+      processExit(err);
+    }
+
+    processExit();
+  });
+}
+
+if (funcArg === 'dropSchema') {
+  nhd[funcArg](argv, function(err, result) {
     if (err) {
       processExit(err);
     }

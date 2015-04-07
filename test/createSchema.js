@@ -2,9 +2,8 @@
 
 var fs = require('fs');
 var path = require('path');
-var chai = require('chai');
-var expect = chai.expect;
-var assert = chai.assert;
+var expect = require('chai').expect;
+var assert = require('chai').assert;
 var createSchema = require('../lib/createSchema');
 
 var query = require('pg-query');
